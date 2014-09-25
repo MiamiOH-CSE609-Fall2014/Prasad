@@ -7,13 +7,13 @@ using namespace std ;
 int main()
 {
   /* data declaration */
-  int i,j ,k ,l ;   /* Declaring inetgers dimensions */
-  int a[10] [10] , b[10] [10] , c[10] [10]; /* Declaring arrays for storing matrixes */
+  int i,j ,k ,l ;   /* Declaring matrix dimensions */
+  vector<vector<int> > a, b; /* Declaring multi dimensional vectors  for storing matrixes */
   int factor  ;    /*  Varaiable For Matrix A formation*/
   int f;          /*  Variable For Matrix B formation */
        
   string           s;       /*Variable for getting the input text file */
-  vector<string>   s1;      /*vector declaration  for stroing the input data */ 
+  vector<string>   s1;      /*vector declaration  for storing the input data */ 
  
   /* Pushing the input data in s1 */
 while (getline(cin,s))
@@ -35,7 +35,6 @@ if (s1[1] != s1[2] )
  k = atoi(s1[2].c_str());    /*Number of rows for Matrix B */
  l = atoi(s1[3].c_str());   /*Number of columns for Matrix B*/ 
 
-
  /* Matrix A i*j  Formation (Data Fetch)  from the input data set*/
  if (j == k)
    {  
@@ -46,19 +45,25 @@ if (s1[1] != s1[2] )
 	{
 	factor = factor + j;
         }
+      a.push_back(vector<int>());
      for (int n2 = 0 ; n2 < j ; n2++ )
 	{
-	  a[n1][n2] = atoi(s1[n2+factor].c_str());
-	  	  cout <<  a[n1][n2] << '\t' ; 
+	  a[n1].push_back(atoi(s1[n2+factor].c_str()));
+	  cout <<  a[n1][n2]   ;
+          if (n2 < j-1 )
+	    {
+	      cout << " ";
+	    }  
                          }
  
         cout << '\n' ;     
 }
    }
 
+ cout << '\n' ;
   f = 4+i*j;
   
-  /* Matrix B Formation (Data Fetch) from the input data set*/
+  /* Matrix B k*l Formation (Data Fetch) from the input data set*/
 
   if (j == k)
     {  
@@ -68,10 +73,15 @@ for (int n1 = 0 ; n1 < k ; n1++)
 	{
 	  f = f + l;
         }
+      b.push_back(vector<int>());
      for (int n2 = 0 ; n2 < l ; n2++ )
 	{
-	  b[n1][n2] = atoi(s1[n2+f].c_str());
-	   cout <<  b[n1][n2] << '\t' ;  
+	  b[n1].push_back(atoi(s1[n2+f].c_str()));
+	  cout <<  b[n1][n2]  ;
+	  if (n2 < l-1) 
+	    {
+	      cout << " ";
+            } 
                          }
  
       cout << '\n'  ;    
@@ -83,6 +93,7 @@ for (int n1 = 0 ; n1 < k ; n1++)
   /* Matrix Multiplication [i][k]*[k][l]*/
   if (j == k) 
     {
+      vector<vector<int> > c (i,vector<int>(l,0)) ;
   for (int n1 = 0 ; n1 < i ; n1++ )
     {
       for (int n3 = 0; n3 < l ; n3++ )
@@ -97,14 +108,18 @@ for (int n1 = 0 ; n1 < k ; n1++)
 	      }
     }
 
-
+  cout << '\n' ; 
   for ( int n1=0; n1<i;n1++)
     {
       for (int n3=0; n3<l;n3++)
 	{
-	  cout << "\t" << c[n1][n3];
+	  cout << c[n1][n3]  ;
+	  if (n3 < l-1)
+            {
+	      cout << " ";
+	    }
 	}
-      cout << "\n\n" ;
+      cout << '\n' ;
     }
    
     }
