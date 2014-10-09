@@ -3,6 +3,7 @@
 #include<string>
 #include<cstdlib>
 #include<stdexcept>
+#include<cmath>
 using namespace std;
 
 void getmarks(string &m)
@@ -20,13 +21,18 @@ void getmarks(string &m)
 int main()
 {
   int count ;
+  double sum;
+  double sum1; 
+  double mean;
+  double sd; 
   string  name;
   string  score;
   vector<string> s1;
   vector<double> s2;
-  count = 0;
+  vector<double> s3;
 
-  cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
+  count = 0;
+cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
 
   while (getline(cin,name))
     { 
@@ -51,8 +57,31 @@ int main()
     }
   cout << '\n' ;
 
+   sum = 0;
 
- for (int i=0 ; i < count ; i++)
+   for (int n=0 ; n < count ; n++) 
+    {
+      sum = sum + s2[n] ;
+    } 
+   mean = sum / count;
+
+   for (int n=0 ; n < count ; n++)
+     {
+       s3.push_back(pow((s2[n]-mean),2));
+     }
+   
+   sum1 =0;  
+   for (int n=0 ; n < count ; n++)
+     {
+       sum1 = sum1 + s3[n];
+     }
+ 
+   sd = sqrt(sum1 / count );
+   
+
+ 
+
+for (int i=0 ; i < count ; i++)
   {
     if (i == 0)
       {
