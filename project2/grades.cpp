@@ -4,6 +4,7 @@
 #include<cstdlib>
 #include<stdexcept>
 #include<cmath>
+#include<iomanip>
 using namespace std;
 
 void getmarks(string &m)
@@ -18,6 +19,17 @@ void getmarks(string &m)
     }
 
 }
+
+int length(int &i)
+{
+  int count1 = 1;
+  while (i /= 10)
+    {
+      count1++;
+    }
+  return count1;
+}
+
 int main()
 {
   int count ;
@@ -30,6 +42,11 @@ int main()
   vector<string> s1;
   vector<double> s2;
   vector<double> s3;
+  double lower_A;
+  double lower_B;
+  double lower_C;
+  double lower_D;
+
 
   count = 0;
 cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
@@ -63,7 +80,7 @@ cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
     {
       sum = sum + s2[n] ;
     } 
-   mean = sum / count;
+   mean = sum / count ;
 
    for (int n=0 ; n < count ; n++)
      {
@@ -77,8 +94,36 @@ cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
      }
  
    sd = sqrt(sum1 / count );
-   
+     
 
+   lower_A = mean + 1.5*sd ;
+   int i1 = lower_A;
+   int c1 = length(i1) + 1;
+   lower_B = mean + 0.5*sd;
+   int i2 = lower_B;
+   int c2 = length(i2) + 1;
+   lower_C = mean - 0.5*sd;
+   int i3 = lower_C;
+   int c3 = length(i3) + 1;
+   lower_D = mean - 1.5*sd;
+   int i4 = lower_D;
+   int c4 = length(i4) + 1;
+
+
+   
+   cout << "Grading Scale " << endl;
+   cout << "A" << " " << "above" << setprecision(c1) << " " << lower_A  << "%" << '\n' ;
+   cout << '\n'; 
+   cout << "B" << " "  << setprecision(c2)<< lower_B << "%" << "-" <<setprecision(c1)<<lower_A<< "%" << '\n' ;
+   cout<< '\n' ;     
+   cout << "C" << " "  <<setprecision(c3)<< lower_C << "%" << "-" <<setprecision(c2)<<lower_B<< "%" << '\n' ;
+   cout <<'\n';
+   cout << "D" << " "  << setprecision(c4) << lower_D << "%" << "-" <<setprecision(c3) <<lower_C<< "%" <<'\n' ;
+   cout<<'\n';
+   cout << "F" << " "  << "below" << setprecision(c4) << " " << lower_D << "%" << '\n' ;
+
+
+  
  
 
 for (int i=0 ; i < count ; i++)
