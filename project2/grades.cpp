@@ -97,6 +97,10 @@ cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
      
 
    lower_A = mean + 1.5*sd ;
+   if (lower_A > 100.0)
+     {
+       lower_A = 100.0;
+     }
    int i1 = lower_A;
    int c1 = length(i1) + 1;
    lower_B = mean + 0.5*sd;
@@ -130,12 +134,44 @@ for (int i=0 ; i < count ; i++)
   {
     if (i == 0)
       {
-	cout<< "Name" << " " << "Score" <<endl;
+	cout<< "Name" <<"                       " << "Score" <<"                     " << "Grades" <<endl;
       }
-    cout << i+1 << "." << s1[i] << " " ;
-    cout <<" "<< s2[i]<< '\n'<< '\n' ;
+    cout << i+1 << "." << s1[i]  ;
+    int i7 = s2[i];
+    int c7 = length(i7) + 1;
+    cout <<"               "<< setprecision(c7) << s2[i] << " " << "%";
+    if (s2[i] > lower_A )
+      {
+	cout <<"                    "<< "A" << '\n'   ;
+	  }
+    else if ((s2[i] >  lower_B ) && (s2[i] < lower_A ) )
+      {
+	cout <<"                    "<< "B" << '\n' ;
+      }
+    else if ((s2[i] > lower_C )  && (s2[i] < lower_B) )
+      {
+	cout <<"                    "<< "C" << '\n'  ;
+      }
+    else if ((s2[i] > lower_D ) && (s2[i] < lower_C))
+      {
+	cout <<"                    "<< "D" << '\n' ;
+      }
+    else if (s2[i] < lower_D )
+      {
+	cout <<"                    "<< "F" << '\n' ;
+      }
+    cout << '\n' ;
 
-  } 
+ 
+  }
+
+ int i5 = mean;
+ int c5 = length(i5) + 2;
+ cout << "Class Average " << "=" << " " <<  setprecision(c5)<< mean <<" "<< "%" << '\n'; 
+ int i6= sd;
+ int c6 = length(i6) + 2;
+ cout << "Standard Deviation " << "=" <<" " << setprecision(c6) <<sd << endl; 
+ 
 
 }
 
