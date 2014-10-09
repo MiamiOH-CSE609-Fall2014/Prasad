@@ -1,3 +1,5 @@
+/* Grades Calcualtion */
+
 #include<iostream>
 #include<vector>
 #include<string>
@@ -139,7 +141,7 @@ for (int i=0 ; i < count ; i++)
     cout << i+1 << "." << s1[i]  ;
     int i7 = s2[i];
     int c7 = length(i7) + 1;
-    cout <<"               "<< setprecision(c7) << s2[i] << " " << "%";
+    cout <<"               "<< setprecision(c7) << s2[i] << "%";
     if (s2[i] > lower_A )
       {
 	cout <<"                    "<< "A" << '\n'   ;
@@ -167,7 +169,7 @@ for (int i=0 ; i < count ; i++)
 
  int i5 = mean;
  int c5 = length(i5) + 2;
- cout << "Class Average " << "=" << " " <<  setprecision(c5)<< mean <<" "<< "%" << '\n'; 
+ cout << "Class Average " << "=" << " " <<  setprecision(c5)<< mean << "%" << '\n'; 
  int i6= sd;
  int c6 = length(i6) + 2;
  cout << "Standard Deviation " << "=" <<" " << setprecision(c6) <<sd << endl; 
