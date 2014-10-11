@@ -23,16 +23,6 @@ void getmarks(string &m)
 
 }
 
-int length(int &i)
-{
-  int count1 = 1;
-  while (i /= 10)
-    {
-      count1++;
-    }
-  return count1;
-}
-
 int main()
 {
   int count ;
@@ -102,32 +92,25 @@ cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
    lower_A = mean + 1.5*sd ;
    if (lower_A > 100.0)
      {
-       lower_A = 100.0;
+       lower_A = 100.0 ;
      }
-   int i1 = lower_A;
-   int c1 = length(i1) + 1;
    lower_B = mean + 0.5*sd;
-   int i2 = lower_B;
-   int c2 = length(i2) + 1;
+ 
    lower_C = mean - 0.5*sd;
-   int i3 = lower_C;
-   int c3 = length(i3) + 1;
-   lower_D = mean - 1.5*sd;
-   int i4 = lower_D;
-   int c4 = length(i4) + 1;
-
-
    
+   lower_D = mean - 1.5*sd;
+   
+
    cout << "Grading Scale " << endl;
-   cout << "A" << " " << "above" << setprecision(c1) << " " << lower_A  << "%" << '\n' ;
+   cout << "A" << " " << "above" << setprecision(1)<<fixed << " " << lower_A  << "%" << '\n' ;
    cout << '\n'; 
-   cout << "B" << " "  << setprecision(c2)<< lower_B << "%" << "-" <<setprecision(c1)<<lower_A<< "%" << '\n' ;
+   cout << "B" << " "  << setprecision(1)<< fixed << lower_B << "%" << "-" <<setprecision(1)<< fixed <<lower_A<< "%" << '\n' ;
    cout<< '\n' ;     
-   cout << "C" << " "  <<setprecision(c3)<< lower_C << "%" << "-" <<setprecision(c2)<<lower_B<< "%" << '\n' ;
+   cout << "C" << " "  <<setprecision(1)<< fixed << lower_C << "%" << "-" <<setprecision(1)<<fixed << lower_B<< "%" << '\n' ;
    cout <<'\n';
-   cout << "D" << " "  << setprecision(c4) << lower_D << "%" << "-" <<setprecision(c3) <<lower_C<< "%" <<'\n' ;
+   cout << "D" << " "  << setprecision(1) <<fixed<< lower_D << "%" << "-" <<setprecision(1) <<fixed<< lower_C<< "%" <<'\n' ;
    cout<<'\n';
-   cout << "F" << " "  << "below" << setprecision(c4) << " " << lower_D << "%" << '\n' ;
+   cout << "F" << " "  << "below" << setprecision(1) <<fixed<< " " << lower_D << "%" << '\n' ;
 
 
   
@@ -140,22 +123,21 @@ for (int i=0 ; i < count ; i++)
 	cout<< "Name" <<"                       " << "Score" <<"                     " << "Grades" <<endl;
       }
     cout << i+1 << "." << s1[i]  ;
-    int i7 = s2[i];
-    int c7 = length(i7) + 1;
-    cout <<"               "<< setprecision(c7) << s2[i] << "%";
+
+    cout <<"               "<< setprecision(1) << fixed << s2[i] << "%";
     if (s2[i] > lower_A )
       {
 	cout <<"                    "<< "A" << '\n'   ;
 	  }
-    else if ((s2[i] >  lower_B ) && (s2[i] < lower_A ) )
+    else if ((s2[i] >  lower_B ) && (s2[i] <= lower_A ) )
       {
 	cout <<"                    "<< "B" << '\n' ;
       }
-    else if ((s2[i] > lower_C )  && (s2[i] < lower_B) )
+    else if ((s2[i] > lower_C )  && (s2[i] <= lower_B) )
       {
 	cout <<"                    "<< "C" << '\n'  ;
       }
-    else if ((s2[i] > lower_D ) && (s2[i] < lower_C))
+    else if ((s2[i] >= lower_D ) && (s2[i] <= lower_C))
       {
 	cout <<"                    "<< "D" << '\n' ;
       }
@@ -168,12 +150,8 @@ for (int i=0 ; i < count ; i++)
  
   }
 
- int i5 = mean;
- int c5 = length(i5) + 2;
- cout << "Class Average " << "=" << " " <<  setprecision(c5)<< mean << "%" << '\n'; 
- int i6= sd;
- int c6 = length(i6) + 2;
- cout << "Standard Deviation " << "=" <<" " << setprecision(c6) <<sd << endl; 
+ cout << "Class Average " << "=" << " " <<  setprecision(2)<< fixed <<  mean << "%" << '\n';
+ cout << "Standard Deviation " << "=" <<" " << setprecision(2) <<fixed << sd << endl; 
  
 
 }
