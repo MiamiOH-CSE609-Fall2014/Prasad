@@ -125,6 +125,12 @@ for (int i=0 ; i < count ; i++)
     cout << i+1 << "." << s1[i]  ;
 
     cout <<"               "<< setprecision(1) << fixed << s2[i] << "%";
+    if ( sd == 0 )
+      {
+	cout <<"                    "<< "C" << '\n' ;
+      }
+    else
+      {
     if (s2[i] > lower_A )
       {
 	cout <<"                    "<< "A" << '\n'   ;
@@ -145,15 +151,14 @@ for (int i=0 ; i < count ; i++)
       {
 	cout <<"                    "<< "F" << '\n' ;
       }
+      }
     cout << '\n' ;
 
- 
   }
-
  cout << "Class Average " << "=" << " " <<  setprecision(2)<< fixed <<  mean << "%" << '\n';
  cout << "Standard Deviation " << "=" <<" " << setprecision(2) <<fixed << sd << endl; 
  
 
+
+
 }
-
-
