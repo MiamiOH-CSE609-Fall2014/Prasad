@@ -16,6 +16,11 @@ void getmarks(string &m)
   double marks;
   cout << " Enter the Student Mark's  :" << '\n' ;
   getline(cin,m);
+  if (m.empty())
+    {
+      cout<< "Enter Valid Score Not Blank " << endl;
+      getline(cin,m);
+    }
   marks = atof(m.c_str());
   if ((marks < 0.0) or (marks > 100.0))
     {
@@ -52,6 +57,20 @@ cout << " Enter the First and Last name of the student or None to Quit  :"<< '\n
 	{
 	  break;
 	}
+       if ( name.empty())
+        {
+
+          cout << "Enter First Name and Last Name  Not Blank "<< endl;
+          getline(cin,name);
+        }
+       if (isdigit(name[0]))
+	 {
+
+	   cout << "Enter Valid Name Not Numbers  "<< endl;
+	   getline(cin,name);
+	 }
+
+
       s1.push_back(name);
      try
        {
