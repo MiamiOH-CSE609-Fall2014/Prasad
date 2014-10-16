@@ -117,43 +117,43 @@ cout << " Enter the First and Last name of the student or None to Quit  :"<< '\n
    cout << "F" << " "  << "below" << setprecision(1) <<fixed<< " " << lower_D << "%" << '\n' ;
      }
 
-  
+   cout << '\n';  
    if (count != 0)
      {
 for (int i=0 ; i < count ; i++)
   {
     if (i == 0)
       {
-	cout<< "Name" <<"                            " << "Score" <<"                     " << "Grade" <<endl;
+	cout<<setw(30)<<left<<"Name"<<right<< "Score" << right << setw(25)<<"Grade" <<endl;
       }
-    cout << i+1 << "." << s1[i]  ;
+    cout << i+1 << "." <<setw(30)<<left<<s1[i]  ;
 
-    cout <<"                      "<< setprecision(1) << fixed << s2[i] << "%";
+    cout <<setprecision(1) << fixed <<right<<s2[i]<<"%" ;
     if ( sd == 0 )
       {
-	cout <<"                    "<< "C" << '\n' ;
+	cout <<setw(20)<<right<<"C" << '\n' ;
       }
     else
       {
     if (s2[i] > lower_A )
       {
-	cout <<"                    "<< "A" << '\n'   ;
+	cout << setw(20)<< right << "A" << '\n'   ;
 	  }
     else if ((s2[i] >  lower_B ) && (s2[i] <= lower_A ) )
       {
-	cout <<"                    "<< "B" << '\n' ;
+	cout <<setw(20)<<right << "B" << '\n' ;
       }
     else if ((s2[i] > lower_C )  && (s2[i] <= lower_B) )
       {
-	cout <<"                    "<< "C" << '\n'  ;
+	cout << setw(20)<<right<< "C" << '\n'  ;
       }
     else if ((s2[i] >= lower_D ) && (s2[i] <= lower_C))
       {
-	cout <<"                    "<< "D" << '\n' ;
+	cout <<setw(20)<<right<< "D" << '\n' ;
       }
     else if (s2[i] < lower_D )
       {
-	cout <<"                    "<< "F" << '\n' ;
+	cout <<setw(20)<<right<<"F" << '\n' ;
       }
       }
     cout << '\n' ;
