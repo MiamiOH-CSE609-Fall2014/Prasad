@@ -1,6 +1,6 @@
 /* Grades Calcualtion */
 /**Curve Grading ****** */
-/* Header */
+/* Header Include Files */
 #include<iostream>
 #include<vector>
 #include<string>
@@ -10,6 +10,7 @@
 #include<iomanip>
 using namespace std;
 
+/*Function Module to Catch The Range Error for student marks*/
 void getmarks(string &m)
 {
   double marks;
@@ -23,28 +24,29 @@ void getmarks(string &m)
 
 }
 
+
 int main()
 {
-  int count ;
-  double sum;
+  int count ;     /* Counting the number of data enteries*/
+  double sum;     /*for total marks*/ 
   double sum1; 
-  double mean;
-  double sd; 
-  string  name;
+  double mean;    /*for mean*/
+  double sd;     /*for standard deviation*/
+  string  name;   
   string  score;
-  vector<string> s1;
-  vector<double> s2;
+  vector<string> s1;  /*for storing name in a vector array */
+  vector<double> s2;  /*for storing student marks*/
   vector<double> s3;
-  double lower_A;
+  double lower_A;    
   double lower_B;
   double lower_C;
   double lower_D;
 
 
   count = 0;
-cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
+cout << " Enter the First and Last name of the student or None to Quit  :"<< '\n' ;
 
-  while (getline(cin,name))
+ while (getline(cin,name))  /* Getting Student Name */
     { 
       if (name == "none" or  name == "None")
 	{
@@ -61,8 +63,8 @@ cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
          getmarks(score);
        	
         }
-     s2.push_back(atof(score.c_str()));  
-     cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
+     s2.push_back(atof(score.c_str())); /*converting string to float*/ 
+     cout << " Enter the First and Last name of the student or None to Quit  :"<< '\n' ;
      count = count +1;
     }
   cout << '\n' ;
@@ -88,7 +90,7 @@ cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
  
    sd = sqrt(sum1 / count );
      
-
+   /*Grade Ranges Calculation*/
    lower_A = mean + 1.5*sd ;
    if (lower_A > 100.0)
      {
@@ -99,8 +101,10 @@ cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
    lower_C = mean - 0.5*sd;
    
    lower_D = mean - 1.5*sd;
-   
-
+ 
+   if (count != 0)
+     {  
+   /*Setprecison and fixed to round the percentage marks in given number of decimal points : 1 or 2 as per the required output*/ 
    cout << "Grading Scale " << endl;
    cout << "A" << " " << "above" << setprecision(1)<<fixed << " " << lower_A  << "%" << '\n' ;
    cout << '\n'; 
@@ -111,20 +115,20 @@ cout << " Enter the name of the student or None to Quit  :"<< '\n' ;
    cout << "D" << " "  << setprecision(1) <<fixed<< lower_D << "%" << "-" <<setprecision(1) <<fixed<< lower_C<< "%" <<'\n' ;
    cout<<'\n';
    cout << "F" << " "  << "below" << setprecision(1) <<fixed<< " " << lower_D << "%" << '\n' ;
-
+     }
 
   
- 
-
+   if (count != 0)
+     {
 for (int i=0 ; i < count ; i++)
   {
     if (i == 0)
       {
-	cout<< "Name" <<"                       " << "Score" <<"                     " << "Grades" <<endl;
+	cout<< "Name" <<"                            " << "Score" <<"                     " << "Grade" <<endl;
       }
     cout << i+1 << "." << s1[i]  ;
 
-    cout <<"               "<< setprecision(1) << fixed << s2[i] << "%";
+    cout <<"                      "<< setprecision(1) << fixed << s2[i] << "%";
     if ( sd == 0 )
       {
 	cout <<"                    "<< "C" << '\n' ;
@@ -158,7 +162,14 @@ for (int i=0 ; i < count ; i++)
  cout << "Class Average " << "=" << " " <<  setprecision(2)<< fixed <<  mean << "%" << '\n';
  cout << "Standard Deviation " << "=" <<" " << setprecision(2) <<fixed << sd << endl; 
  
+ 
+     }
 
+   if (count == 0 )
+     {
+       cout << " Insufficient Data to compute the statistical result " << endl;
+     }
+  
 
 
 }
