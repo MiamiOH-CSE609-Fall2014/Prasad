@@ -6,46 +6,36 @@
 #include<tuple>
 #include<sstream>
 using namespace std;
-void parseFastfile(string &s)
+tuple<vector<string>,vector<string>,vector<string> > parseFastfile(string s)
 {
   ifstream file(s);
-  string f;
-  string f1;
-  string f2;
-  string f3;
-  string f4; 
+  string f1; 
   vector <string> h;
   vector <string> c;
-  vector <string> se;
-   typedef tuple<vector<string>,vector<string>,vector<string> > t;
-   vector <t> v;     
+  vector <string> se;    
   if (file.is_open())
-    {
-      getline(file,f,';');     
-      h.push_back(f);
-      while (getline(file,f1,';'))
-	{
-	      stringstream i (f1); 
-	      getline(i,f2); 
-	      f4 = ";" + f2;
-	      c.push_back(f4);           
-              getline(i,f3,';');
-	      se.push_back(f3);
-	     
+    {   
+  while (getline(file,f1))
+        {
+	  if (f1.substr(0,1) == ">")
+	    {  
+	    h.push_back(f1);
+	    }
+	  else if (f1.substr(0,1) == ";")
+            {
+	      c.push_back(f1);
+            }
+	  else 
+            {   
+	      se.push_back(f1);
+            }
+	    
 
 	}
-        v.push_back(t(h,c,se));
-	/*	for (int i=0 ; i<c.size();i++) 
-	  {
-	    cout << c[i] << endl;
-	    }*/      
-        for(t tu : v)
-	{
-	  for ( int i =0; i< get<1>(tu).size();i++){
-	   cout << get<2>(tu)[i] << endl;
-	  }
-	  
-	  }; 
+
+ 
+      return make_tuple(h,c,se);
+		  	  
     }
 
 }
@@ -53,9 +43,12 @@ int main()
 {
   string filepath;
   cout << "Enter the Fasta file to be parsed " <<endl;
-  cin  >> filepath;   
- 
-  parseFastfile(filepath);
-
-   
+  cin  >> filepath;
+  tuple<vector<string>,vector<string>,vector<string> > t1;
+  t1 =  parseFastfile(filepath);
+   for ( int i =0; i< get<2>(t1).size();i++)
+  {
+    cout << get<2>(t1)[i] << endl;
+  }
+  
 }
