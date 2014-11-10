@@ -1,3 +1,4 @@
+/* Spectrum Assingment Problem Discussion and Demonstration */
 #include<iostream>
 #include<string>
 #include<vector>
@@ -21,6 +22,8 @@ Size[4 * 1]
 Total Calculated Capacity = (t1 + t2 + t3 + t4 + 3*5(Guard Band in between) )
 ------->( t1--- 5 -- t2 --- 5 -- t3 --5--  t4)
 */
+/*Goal : To efficiently utilize the given spectrum */
+/* Function Module to ensure Spectrum Contiguity Constraint */
 void  gettraffic(string &s2) 
 {
   double tn;
@@ -76,6 +79,7 @@ try
 
     }
 
+  /*Checking The Non-Overlapping Spectrum Constraint by Comparing each traffic data */
 for ( int i = 0; i < t.size()  ; i++)
     {
       for (int j = 0 ; j < t.size() ; j++) 
@@ -91,6 +95,7 @@ for ( int i = 0; i < t.size()  ; i++)
     }
 
  
+/*Dening teh Spectrum Assignement Process , in case there is a overlapping scenario*/
   if (c == 1)
     {
       cout << " Non-Overlap Spectrum Constraint Situation " << endl;
@@ -101,6 +106,7 @@ for ( int i = 0; i < t.size()  ; i++)
   sum = 0.0;
   double  sum1;
   double  saved;
+  /*In case No-Overlapping is there spectrum assingment process is continued*/
 if(c != 1)
     {
   for (int n=0 ; n< t.size();n++)
