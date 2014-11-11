@@ -6,13 +6,15 @@
 #include<tuple>
 #include<sstream>
 using namespace std;
-tuple<vector<string>,vector<string>,vector<string> > parseFastfile(string s)
+string comb[]= {"AA","AG","AC","AT","GA","GG","GC","GT","CA","CG","CC","CT","TA","TG","TC","TT"}; 
+tuple<vector<string>,vector<string>,string > parseFastfile(string s)
 {
   ifstream file(s);
   string f1; 
   vector <string> h;
   vector <string> c;
-  vector <string> se;    
+  string se = "";
+    
   if (file.is_open())
     {   
   while (getline(file,f1))
@@ -27,7 +29,7 @@ tuple<vector<string>,vector<string>,vector<string> > parseFastfile(string s)
             }
 	  else 
             {   
-	      se.push_back(f1);
+	      se = se + f1;
             }
 	    
 
@@ -39,16 +41,42 @@ tuple<vector<string>,vector<string>,vector<string> > parseFastfile(string s)
     }
 
 }
+
+map <string , int > digramFreqScores(string si)
+{
+  map <string , int > m;
+
+  for (int i =0; i < si.size() ;i++)
+    {
+      
+    }
+
+}
+
+vector< vector<int> > digramFreqMatrix( map< string, int > M1)
+{
+
+}
+
 int main()
 {
   string filepath;
+   
   cout << "Enter the Fasta file to be parsed " <<endl;
   cin  >> filepath;
-  tuple<vector<string>,vector<string>,vector<string> > t1;
+  tuple<vector<string>,vector<string>,string> t1;
   t1 =  parseFastfile(filepath);
-   for ( int i =0; i< get<2>(t1).size();i++)
+  cout << get<2> (t1)<< endl;
+  /*  for ( int i =0; i< get<0>(t1).size();i++)
   {
-    cout << get<2>(t1)[i] << endl;
-  }
+    cout << get<0>(t1)[i] << endl; 
+    
+    }*/
+
+  map <string , int > scores = digramFreqScores(get<2> (t1));
+
+
+    
+
   
 }
