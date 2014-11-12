@@ -45,8 +45,8 @@ tuple<vector<string>,vector<string>,string > parseFastfile(string s)
 
 map <string , int > digramFreqScores(string si)
 {
+  map <string , int > m;
   int c;
- vector<int> n;
 string ::size_type i = 0;
 for (int j =0; j < co.size(); j++)
    {
@@ -65,18 +65,41 @@ while ((i = si.find(co[j],i)) != string::npos)
      }
  }
    
- n.push_back(c);
+ m[co[j]] = c;
 }
 
- for (int i =0; i< n.size();i++)
-   {
-     cout << n[i] << endl;
-   } 
+ return m;
 }
 
-vector< vector<int> > digramFreqMatrix( map< string, int > M1)
+vector< vector<int> > digramFreqMatrix( map<string,int>  scores)
 {
-
+  vector<vector<int> > c ;
+  vector<int> c1;
+  int l;
+  int l1;
+  l = 0;
+  l1 = 4 ;
+  while (l1 < 20) 
+    {
+    
+ for (int n2 = l ; n2 < l1 ; n2++)
+	{
+	  if (n2 == 16)
+	    {
+	      break;
+	    } 	 
+	 c1.push_back(scores[co[n2]]);
+	 if ((n2 == 3)or (n2 == 7) or (n2 == 11) or (n2 == 15)  )
+	   {
+	     c.push_back(c1);
+             c1.clear();
+	   }
+	}
+ l = l + 4;
+ l1 = l1 + 4;
+    }
+         	
+  return c;     
 }
 
 int main()
@@ -87,8 +110,19 @@ int main()
   tuple<vector<string>,vector<string>,string> t1;
   t1 =  parseFastfile(filepath);
   map <string , int > scores = digramFreqScores(get<2> (t1));
+  vector< vector <int> > m5 =  digramFreqMatrix(scores);
  
+     for (int n1 = 0 ; n1 < m5.size() ;n1++)
+    {
+      for (int n3=0 ; n3 < m5[n1].size()  ; n3++ )
+      {
+      cout << m5[n1][n3] << "\t" ;
+      }
+      cout << "\n";
+      } 
   
+  
+
     
 
   
