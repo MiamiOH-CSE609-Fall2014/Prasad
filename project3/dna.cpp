@@ -39,10 +39,7 @@ tuple<vector<string>,vector<string>,string > parseFastfile(string s)
       return make_tuple(h,c,se);
 		  	  
     }
-
 }
-
-
 map <string , int > digramFreqScores(string si)
 {
   map <string , int > m;
@@ -130,7 +127,7 @@ vector< vector<int> >  parseScoringFile(string line)
  g1.push_back(atoi(f4.c_str()));
  l.push_back(g1);
  g1.clear();
- 
+  
 
     }
     }
@@ -147,7 +144,100 @@ vector< vector<int> >  parseScoringFile(string line)
 
 }
 
+tuple<int, int> scoreSequence(string haystack, string needle, vector< vector<int> > scoring_m)
+{
+  vector<string> si;
+  vector<string> st;
+  int i1 = haystack.size();
+  int i2 = needle.size();
+  int c ;
+  c = 0;
+  string::iterator c1;
 
+  while (c < haystack.size())
+    {
+      if ((i1-c == i2-1))
+        {
+          break;
+        }
+      string s;
+      s = haystack.substr(c,i1-c);
+      si.push_back(s);
+      c = c + 1;
+
+    }
+
+
+  for (int i =0; i<si.size();i++)
+    {
+
+      string l;
+      l = si[i].substr(0,needle.size());
+      st.push_back(l);
+    }
+
+  int k =0;  
+  int value;
+  int value1;
+  value1 = 0;
+  vector<int> v;
+  for (int i=0; i < st.size();i++)
+    {
+      for (c1 = st[i].begin();c1!= st[i].end() ; c1++)
+
+	{
+
+	  string f;
+          string z;
+	  f = *c1;
+          z =  f+needle[k];
+          if (z == "AA"){ value = scoring_m[0][0]; }
+	  if (z == "AG"){ value = scoring_m[0][1]; }
+	  if (z == "AC"){ value = scoring_m[0][2]; }
+	  if (z == "AT"){ value = scoring_m[0][3]; } 
+	  if (z == "GA"){ value = scoring_m[1][0]; }
+	  if (z == "GG"){ value = scoring_m[1][1]; } 
+	  if (z == "GC"){ value = scoring_m[1][2]; }
+	  if (z == "GT"){ value = scoring_m[1][3]; }
+	  if (z == "CA"){ value = scoring_m[2][0]; }   
+	  if (z == "CG"){ value = scoring_m[2][1]; } 
+	  if (z == "CC"){ value = scoring_m[2][2]; }
+	  if (z == "CT"){ value = scoring_m[2][3]; }
+	  if (z == "TA"){ value = scoring_m[3][0]; }
+	  if (z == "TG"){ value = scoring_m[3][1]; }
+	  if (z == "TC"){ value = scoring_m[3][2]; }
+	  if (z == "TT"){ value = scoring_m[3][3]; }  
+          k++; 
+	  value1 = value1 + value;
+          value = 0; 
+	  if ( k == (needle.size()))
+	    {
+	      int value_f;
+	      k = 0;
+              value_f = value1;
+              value1 = 0 ;
+              v.push_back(value_f);
+	      
+	    }
+	}
+    }
+
+  int index;
+  int max;
+  vector<int>::const_iterator  imax;
+   
+  imax = max_element(v.begin(), v.end());
+  max = *imax;
+  vector <int>::iterator pos ;
+  pos = find (v.begin(),v.end(), max);
+  int npos = distance (v.begin(), pos); 
+  index = npos;      
+    
+  return make_tuple(index,max);
+
+
+
+}
 int main()
 {
   string filepath;
@@ -160,9 +250,12 @@ int main()
   vector< vector <int> > m5 =  digramFreqMatrix(scores);
   cout << " Enter the score CSV file  " << endl;
   cin >> scorepath ;
-  vector< vector <int> > m6 = parseScoringFile(scorepath);
+  vector< vector <int> > scoring_m = parseScoringFile(scorepath);
+  tuple<int, int> max_score = scoreSequence(get<2> (t1), "TAATCTCAGCACTTTGAGAGGCCGAGGCAT", scoring_m );
+  cout << get<0> (max_score)<<endl ;
+  cout << get<1> (max_score)<<endl ;
 
- 
+  
   /*  for (int n1 = 0 ; n1 < m5.size() ;n1++)
     {
       for (int n3=0 ; n3 < m5[n1].size()  ; n3++ )
