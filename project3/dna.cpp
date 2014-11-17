@@ -263,38 +263,94 @@ tuple<int,int,string>findHighScore(string haystack,vector<string> needles,vector
   
 }
 
-int main()
+int main(int argc , char* argv[])
 {
-  string filepath;
-  string scorepath;
-  cout << "Enter the Fasta file to be parsed " <<endl;
-  cin  >> filepath;
+ 
+  if (argc != 3)
+    {
+      cout <<  "Specify the 2 file paths" << endl;
+    } 
+
   tuple<vector<string>,vector<string>,string> t1;
-  t1 =  parseFastfile(filepath);
+  t1 =  parseFastfile(argv[1]);
   map <string , int > scores = digramFreqScores(get<2> (t1));
   vector< vector <int> > m5 =  digramFreqMatrix(scores);
-  cout << " Enter the score CSV file  " << endl;
-  cin >> scorepath ;
-  vector< vector <int> > scoring_m = parseScoringFile(scorepath);
-  tuple<int, int> max_score = scoreSequence(get<2> (t1), "TAATCTCAGCACTTTGAGAGGCCGAGGCAT", scoring_m );
-  cout << get<0> (max_score)<<endl ;
-  cout << get<1> (max_score)<<endl ;
-  string  data[]= {"TAATCTCAGCACTTT","GAGAGGCCGAGGCAT"};
-  vector<string> data1 (data, data + sizeof(data) / sizeof(string) );
-  tuple<int,int,string> high_scorer = findHighScore(get<2> (t1),data1, scoring_m );
-  cout<<  get<0> (high_scorer) << endl;
-  cout<<  get<1> (high_scorer) << endl;
-  cout << get<2> (high_scorer) << endl;
- 
-  
-  /*  for (int n1 = 0 ; n1 < m5.size() ;n1++)
+  cout << "Diagram Frequency Matrix " << endl;
+  string  disp[]= {"A","G","C","T"};
+  vector<string> disp1 (disp, disp + sizeof(disp) / sizeof(string) );
+   for (int l=0 ; l < disp1.size(); l++)
     {
+      if (l == 0)
+	{
+	  cout<<"  " ;
+	}
+      cout <<" " << disp1[l] << " ";
+      }  
+
+  cout << '\n' ;
+   for (int n1 = 0 ; n1 < m5.size() ;n1++)
+    {
+      cout << disp1[n1] << " ";
       for (int n3=0 ; n3 < m5[n1].size()  ; n3++ )
       {
-      cout << m5[n1][n3] << "\t" ;
+      cout<< m5[n1][n3] << " " ;
       }
       cout << "\n";
-      } */
+      } 
+   cout << '\n' ;
+   cout << " Scoring Matrix " << endl;
+   for (int l=0 ; l < disp1.size(); l++)
+     {
+       if (l == 0)
+	 {
+	   cout<<"  " ;
+	 }
+
+       cout << disp1[l] << " " ;
+     }
+   cout<<'\n';
+   vector< vector <int> > scoring_m = parseScoringFile(argv[2]);
+
+   for (int n1 = 0 ; n1 < scoring_m.size() ;n1++)
+     {
+       cout << disp1[n1] << " ";
+       for (int n3=0 ; n3 < scoring_m[n1].size()  ; n3++ )
+	 {
+	   cout<< scoring_m[n1][n3] << " " ;
+	 }
+       cout << "\n";
+     }
+   int num;
+   string s;
+   vector<string> data; 
+   cout << endl;
+   cout << "How many seqeunces would you like to score? " << endl; 
+   cin >> num ;
+   
+   for (int m=0; m < num ; m++) 
+     {
+       cout << " Enter the sequence #" << m+1 <<"on a single line " << endl;
+       cin >> s;
+       data.push_back(s);    
+
+     }
+
+   cout << '\n';
+   cout << '\n';
+   for (int j =0 ; j < data.size();j++)
+     {
+       tuple<int, int> max_score = scoreSequence(get<2> (t1),data[j] , scoring_m );
+       cout << " Sequence : " << endl;
+       cout << data[j] << endl;   
+       cout <<" Score :" << get<1> (max_score) << " at position" << " " << get<0> (max_score) << '\n';
+       cout << '\n';
+
+     }
+   cout << '\n' ;
+   tuple<int,int,string> high_scorer = findHighScore(get<2> (t1),data, scoring_m );
+   cout << "High Scorer Sequence is : " << endl;
+   cout << get<2> (high_scorer) << endl;
+   cout << " Score :" << get<1> (high_scorer) << " at position" << " " << get<0> (high_scorer) << '\n';
   
   
 
