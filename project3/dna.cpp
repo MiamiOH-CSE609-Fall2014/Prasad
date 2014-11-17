@@ -238,6 +238,31 @@ tuple<int, int> scoreSequence(string haystack, string needle, vector< vector<int
 
 
 }
+
+tuple<int,int,string>findHighScore(string haystack,vector<string> needles,vector< vector<int> > scoring_m)
+{
+  int position = 0;
+  int score = 0;
+  string needle = "";
+  tuple <int,int> t1;  
+  for (int k=0; k < needles.size();k++)
+    {
+      t1 = scoreSequence(haystack, needles[k], scoring_m );
+      if (get<1> (t1) > score)
+	{
+	  score    = get<1> (t1);
+          position = get<0> (t1);
+          needle   = needles[k];
+
+	}  
+    }
+ 
+
+  return make_tuple(position,score,needle);
+
+  
+}
+
 int main()
 {
   string filepath;
@@ -254,7 +279,13 @@ int main()
   tuple<int, int> max_score = scoreSequence(get<2> (t1), "TAATCTCAGCACTTTGAGAGGCCGAGGCAT", scoring_m );
   cout << get<0> (max_score)<<endl ;
   cout << get<1> (max_score)<<endl ;
-
+  string  data[]= {"TAATCTCAGCACTTT","GAGAGGCCGAGGCAT"};
+  vector<string> data1 (data, data + sizeof(data) / sizeof(string) );
+  tuple<int,int,string> high_scorer = findHighScore(get<2> (t1),data1, scoring_m );
+  cout<<  get<0> (high_scorer) << endl;
+  cout<<  get<1> (high_scorer) << endl;
+  cout << get<2> (high_scorer) << endl;
+ 
   
   /*  for (int n1 = 0 ; n1 < m5.size() ;n1++)
     {
