@@ -181,6 +181,11 @@ tuple<int, int> scoreSequence(string haystack, string needle, vector< vector<int
   int value1;
   value1 = 0;
   vector<int> v;
+  int count = 0;
+  int index;
+  int max1 = 0;
+  int count1 , count2;
+  int value_f;
   for (int i=0; i < st.size();i++)
     {
       for (c1 = st[i].begin();c1!= st[i].end() ; c1++)
@@ -212,9 +217,15 @@ tuple<int, int> scoreSequence(string haystack, string needle, vector< vector<int
           value = 0; 
 	  if ( k == (needle.size()))
 	    {
-	      int value_f;
 	      k = 0;
+              count1 = count++;
               value_f = value1;
+	      if (value_f >= max1)
+                {
+                   max1 = value_f;
+                  count2 = count1;
+                  index = count2;
+                }
               value1 = 0 ;
               v.push_back(value_f);
 	      
@@ -222,17 +233,11 @@ tuple<int, int> scoreSequence(string haystack, string needle, vector< vector<int
 	}
     }
 
-  int index;
+  
   int max;
   vector<int>::const_iterator  imax;
-   
   imax = max_element(v.begin(), v.end());
-  max = *imax;
-  vector <int>::iterator pos ;
-  pos = find (v.begin(),v.end(), max);
-  int npos = distance (v.begin(), pos); 
-  index = npos;      
-    
+  max = *imax;   
   return make_tuple(index,max);
 
 
