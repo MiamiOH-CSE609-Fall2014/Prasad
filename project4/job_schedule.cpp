@@ -7,6 +7,22 @@
 #include<iomanip>
 #include<map>
 using namespace std;
+void getdeadline(string &s1 , string &s2)
+{
+  double d1;
+  d1 = atof(s1.c_str());
+  double d2;
+  d2 = atof(s2.c_str());
+  
+  if (d1 < d2 )
+    {
+
+      throw out_of_range(" Deadline Can't be less than the actual job processing time ") ;
+    }
+
+
+}
+
 int partition(vector<double>& co, int left,int right);
 void quickSort(vector<double>& co, int left,int right)
 {
@@ -56,9 +72,19 @@ int main()
 	{
 	  break;
 	}
-    s1.push_back(atof(s.c_str()));
     cout << "Enter the time deadline of job  " << endl ;
     getline(cin,l);
+    try 
+      {
+	getdeadline(l,s);
+      }
+    catch (out_of_range)
+      {
+	cout << " Deadline Can't be less than actual job procesing time " << '\n';
+        cout << "Enter the processing time of job " << endl;
+        continue;
+      }
+    s1.push_back(atof(s.c_str()));
     s2.push_back(atof(l.c_str()));
     cout << "Enter the processing time of job" << endl; 
     }
