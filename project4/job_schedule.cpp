@@ -64,6 +64,13 @@ int main()
   vector <double> s1;
   vector <double> s2;
   vector <double> s3;
+  vector <double> start;
+  vector <double> end;
+  vector <double> l1;
+  vector <double> start1;
+  vector <double> end1;
+  vector <double> l2;
+
   cout<< "Minimizing the maximum lateness Program  -->>c++ code "  << endl; 
   cout << "Enter the processing time of job " << endl; 
   while (getline(cin,s))
@@ -94,7 +101,7 @@ int main()
     {
       if (i == 0)
 	{
-	cout << "tj"  << " ";
+	cout << "ProcessingTime :"  << " ";
     }
       cout << s1[i] << " ";
     
@@ -108,7 +115,7 @@ for (int i =0 ; i < s2.size() ; i++)
     {
       if (i == 0)
 	{
-	cout << "dj"  << " ";
+	  cout << "Deadline :"  << "       ";
     }
       cout << s2[i] << " ";
     
@@ -124,6 +131,52 @@ for (int i =0 ; i < s2.size() ; i++)
    }
 
 
+ double st;
+ double en;
+ double t = 0;
+ 
+for (int i =0 ; i < s2.size() ; i++)
+   {
+    
+     st = t;
+     en = st + m[s2[i]];
+     start.push_back(st);
+     end.push_back(en);
+     t = t + m[s2[i]] ;
+   }   
+ 
+
+ double sub;
+ double sum = 0;  
+ for (int i =0 ; i < end.size() ; i++)
+   {
+     sub = end[i] - s2[i];
+     if (sub < 0) 
+       {
+	 sub = 0;
+       }
+     l1.push_back(sub);
+     sum = sum + l1[i]; 
+   }
+ 
+ cout << '\n'; 
+ cout << "The job scheduling without the greedy approach of picking early deadline" << endl;
+ cout <<'\n';
+ for (int i=0 ; i < s2.size(); i++)
+   {
+     if (i == 0)
+       {
+	 cout << setw(2)<< left << "Jobs" << right << setw(15) << "Start Time" <<right << setw(12)<< "End Time" << right << setw(11) << "Lateness ";
+         cout<< '\n';
+       }
+     cout <<setw(2)<<left<< i+1 <<right<<setw(10)<<start[i] <<right<< setw(12)<<end[i] << right << setw(10)<<l1[i] ;
+       cout << '\n';
+}
+
+ cout << " The totatl lateness here in(units of time) :" << sum ;
+
+
+
  /*Quick Sort Logic Implementation */ 
 
  int left = 0;
@@ -131,12 +184,11 @@ for (int i =0 ; i < s2.size() ; i++)
  quickSort(s2 , left , right);
  cout << '\n';  
  cout << "The List of Processing Time and Job Deadline after Quick sorted by time dealine " << endl;
-
  for (int i =0 ; i < s2.size() ; i++)
    {
      if (i == 0)
        {
-	 cout << "tj"  << " ";
+	 cout << "ProcessingTime:"  << " ";
        }
      cout << m[s2[i]] << " ";
 
@@ -147,17 +199,86 @@ for (int i =0 ; i < s2.size() ; i++)
    {
      if (i == 0)
        {
-         cout << "dj"  << " ";
+         cout << "Deadline :"  << "      ";
        }
      cout << s2[i] << " ";
 
    }
 
+ double st1;
+ double en1;
+ double t1 = 0;
+ for (int i =0 ; i < s2.size() ; i++)
+   {
 
+     st1 = t1;
+     en1 = st1 + m[s2[i]];
+     start1.push_back(st1);
+     end1.push_back(en1);
+     t1 = t1 + m[s2[i]] ;
+   }
+
+
+
+ double sub1;
+ double sum1 = 0;
+ for (int i =0 ; i < end1.size() ; i++)
+   {
+    
+     sub1 = end1[i] - s2[i];
+     if (sub1 < 0)
+       {
+         sub1 = 0;
+       }
+     l2.push_back(sub1);
+     sum1 = sum1 + l2[i];
+   }
+
+ cout << '\n';
+ cout << "The job scheduling with the greedy approach of picking early deadline first"  << endl;
+ cout << '\n' ;
+ for (int i=0 ; i < s2.size(); i++)
+   {
+     if (i == 0)
+       {
+	 cout << setw(2) << "Jobs" << setw(15) << "Start Time" <<setw(12)<< "End Time" << setw(11) << "Lateness ";
+
+
+         cout<< '\n';
+       }
+     cout <<setw(2)<< i+1 <<setw(10)<<start1[i] << setw(12)<<end1[i] <<setw(10)<<l2[i] ;
+
+ 
+     cout << '\n';
+   }
+
+  cout << " The totatl lateness here in(units of time) :" << sum1 ;
+
+ 
+  double answer = ((sum - sum1)/sum)*100;
+  cout << '\n';
+
+  if (answer == 0.00)
+    {
+      cout << "Case : User Input deadline data time is already sorted " << endl; 
+    }
+
+
+  if (sum == 0.00)
+    {
+
+      cout << " Case : Difference between deadline time and processing time is higher .Lateness is already optimized " << endl;
+    } 
+      else 
+	{
+	  cout << " Percentage reduction in Lateness Time " << setprecision(2) << fixed << answer << "%" << endl;
+
+
+	}
+
+    
 
 }
-
-
 
 
 
