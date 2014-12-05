@@ -70,15 +70,30 @@ int main()
   vector <double> start1;
   vector <double> end1;
   vector <double> l2;
-
   cout<< "Minimizing the maximum lateness Program  -->>c++ code "  << endl; 
   cout << "Enter the processing time of job " << endl; 
   while (getline(cin,s))
     {
-    if (s == "none" or s == "None")
+        
+if (s == "none" or s == "None")
 	{
 	  break;
-	}
+	} 
+
+ if (s.empty())
+	{
+	  cout << "Processing time  can't be left blank " << endl; 
+	cout << "Enter the processing time of job " << endl;  
+        continue;
+        }
+
+ if (!isdigit(s[0]))
+   {
+     cout << "Processing time can't be a string " << endl;
+     cout << "Enter the processing time of job " << endl;
+     continue;
+   } 
+    
     cout << "Enter the time deadline of job  " << endl ;
     getline(cin,l);
     try 
